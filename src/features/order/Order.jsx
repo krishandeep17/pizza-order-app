@@ -1,4 +1,8 @@
 // Test ID: IIDSAT
+// Test ID: Z8XRRI
+// Test ID: UXQ4H4
+
+import { getOrder } from "../../services/apiRestaurant";
 
 import {
   calcMinutesLeft,
@@ -81,4 +85,8 @@ export default function Order() {
       </div>
     </div>
   );
+}
+
+export async function orderLoader({ params }) {
+  return await getOrder(params.orderId);
 }
