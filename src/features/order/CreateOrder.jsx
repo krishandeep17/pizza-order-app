@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
+import { getCart } from "../cart/cartSlice";
+import { getUsername } from "../user/userSlice";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -9,50 +12,33 @@ const isValidPhone = (str) =>
     str,
   );
 
-const fakeCart = [
-  {
-    pizzaId: 12,
-    name: "Mediterranean",
-    quantity: 2,
-    unitPrice: 16,
-    totalPrice: 32,
-  },
-  {
-    pizzaId: 6,
-    name: "Vegetable",
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
-  {
-    pizzaId: 11,
-    name: "Spinach and Mushroom",
-    quantity: 1,
-    unitPrice: 15,
-    totalPrice: 15,
-  },
-];
-
 export default function CreateOrder() {
+  const cart = useSelector(getCart);
+  const username = useSelector(getUsername);
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   // This hook returns the action data value
   const formErrors = useActionData();
 
-  const cart = fakeCart;
-
   return (
     <div className="px-4 py-6">
       <h2 className="mb-8 text-xl font-semibold">
-        Ready to order? Let'&apos;'s go!
+        Ready to order? Let&apos;s go!
       </h2>
 
       {/* <Form method="POST" action="/order/new"> */}
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
-          <input className="input grow" type="text" name="customer" required />
+          <input
+            className="input grow"
+            type="text"
+            name="customer"
+            defaultValue={username}
+            required
+          />
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
