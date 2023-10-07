@@ -51,7 +51,8 @@ export default function MenuItem({ pizza }) {
               <UpdateItemQuantity
                 currentQuantity={currentQuantity}
                 pizzaId={id}
-              />{" "}
+              />
+
               <DeleteItem pizzaId={id} />
             </div>
           )}

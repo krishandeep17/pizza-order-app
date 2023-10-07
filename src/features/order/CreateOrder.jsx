@@ -75,9 +75,9 @@ export default function CreateOrder() {
           </div>
         </div>
 
-        <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
-          <div className="grow">
+          <div className="relative grow">
             <input
               className="input w-full"
               type="text"
@@ -86,27 +86,28 @@ export default function CreateOrder() {
               defaultValue={address}
               disabled={isAddressLoading}
             />
+
             {isAddressError && (
-              <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">
+              <p className="mt-2 w-full rounded-md bg-red-100 p-2 text-xs text-red-700">
                 {addressError}
               </p>
             )}
-          </div>
 
-          {!position.latitude && !position.longitude && (
-            <span className="absolute right-[3px] top-[3px] z-10 md:right-[5px] md:top-[5px]">
-              <Button
-                type="small"
-                disabled={isAddressLoading}
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(fetchAddress());
-                }}
-              >
-                Get Position
-              </Button>
-            </span>
-          )}
+            {!position.latitude && !position.longitude && (
+              <span className="absolute right-[3px] top-[3px] z-10 md:right-[5px] md:top-[5px]">
+                <Button
+                  type="small"
+                  disabled={isAddressLoading}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(fetchAddress());
+                  }}
+                >
+                  Get Position
+                </Button>
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="mb-12 flex  items-center gap-5">
